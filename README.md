@@ -1,6 +1,19 @@
 # history-dependent-manipulation
 An official data + code for "Visually Grounding Language Instruction for History-Dependent Manipulation" (ICRA 2022)
 
+## Pre-requisite
+- Blender (tested on v.2.78)
+## Installation
+1. Clone the repository
+```
+git clone https://github.com/cotton-ahn/history-dependent-manipulation
+cd history-dependent-manipulation
+```
+2. Clone the CLEVR dataset generation code for data generation
+```
+git clone https://github.com/facebookresearch/clevr-dataset-gen
+```
+
 ## TO-DOs
 - organize data
 - count the number of data again
