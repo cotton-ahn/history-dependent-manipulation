@@ -1,0 +1,1 @@
+{"sentence": ["move the red block in front of the green blocks to the front center", "move the left red block to the center front side of the workspace", "move the red block in front of the moved green blocks to the front center"], "bbox": {"pick": [78, 81, 120, 123], "place": [112, 186, 144, 218]}, "explicit": [false, false, true], "implicit": [false, false, false]}

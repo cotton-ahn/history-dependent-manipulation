@@ -1,0 +1,1 @@
+{"sentence": ["move the front gold block to the rear left point", "move the foremost yellow block to the rear left corner", "pick up the yellow block that you did not move and place it to the rear right corner of the workspace"], "bbox": {"pick": [143, 195, 183, 235], "place": [38, 38, 70, 70]}, "explicit": [false, false, true], "implicit": [false, false, false]}

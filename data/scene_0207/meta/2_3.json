@@ -1,0 +1,1 @@
+{"sentence": ["move the red block to the right middle side so that it can face blocks that you moved before", "move the red block to the right center side", "rotate the red block 45 degrees counter-clockwise and move it to the center right"], "bbox": {"pick": [131, 143, 175, 187], "place": [186, 112, 218, 144]}, "explicit": [true, false, false], "implicit": [false, false, false]}

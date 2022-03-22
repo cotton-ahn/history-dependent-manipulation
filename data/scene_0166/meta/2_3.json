@@ -1,0 +1,1 @@
+{"sentence": ["take the left one among the front green blocks and place it in the rear left corner", "rotate the middle shiny green block by 30 degrees and move it to the rear left side of the workspace"], "bbox": {"pick": [91, 187, 133, 229], "place": [38, 38, 70, 70]}, "explicit": [false, false], "implicit": [false, false]}

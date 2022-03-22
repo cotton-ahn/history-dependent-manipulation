@@ -1,0 +1,1 @@
+{"sentence": ["rotate the rear blue block 45 degree and place it in the right rear corner", "rotate the rear blue block by -60 degrees and move it to the rear right side of the front blue block"], "bbox": {"pick": [126, 33, 170, 77], "place": [186, 38, 218, 70]}, "explicit": [false, false], "implicit": [false, false]}

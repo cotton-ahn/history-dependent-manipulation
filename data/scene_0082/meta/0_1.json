@@ -1,0 +1,1 @@
+{"sentence": ["place the rearmost yellow block next to the green block", "move the rear non-metal yellow block to the right side of the green block"], "bbox": {"pick": [66, 75, 100, 109], "place": [169, 195, 201, 227]}, "explicit": [false, false], "implicit": [false, false]}
