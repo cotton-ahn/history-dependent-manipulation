@@ -2,7 +2,15 @@
 An official data + code for "Visually Grounding Language Instruction for History-Dependent Manipulation" (ICRA 2022)
 
 ## Dataset
-
+- After cloning this repository, you would see the data folder, which has everything for training and testing.
+- It consists of 300 history-dependent-manipulation tasks.
+- Each "scene_xxxx" folder has: bbox, heatmap, image, meta folders
+    - "image" has images observing the workspace from bird-eye-view and from front-side.
+    - "bbox" has information of cube objects existing in image.
+    - "meta" has (1) language annotation and (2) bounding-box information for pick-and-place (3) whether it has explicit/implicit dependency.
+        - "0_1.json" has manipulation information between image 0 and image 1. 
+    - "heatmap" has ground truth heatmaps for pick and place
+        - "pick/place_0_1.json" show heatmap for manipulation between image 0 and image 1.
 
 ## Network Training
 
@@ -41,7 +49,8 @@ blender --background --python render_images_wo_stack.py -- --use_gpu 1 --materia
 
 ```
 7. Image data will be saved to `clevr-dataset-gen/output`.
-8. To find how to annotate bounding box from the generated files, refer to `{this repository}/find_bbox_info.pynb`
+8. To find how to annotate bounding box from the generated files, 
+   - refer to `{this repository}/find_bbox_info.pynb`
 
 ## TO-DOs
 - organize data
