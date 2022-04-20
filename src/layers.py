@@ -64,9 +64,9 @@ class Residual(nn.Module):
         return out 
 
 class Hourglass_history(nn.Module):
-    def __init__(self, n, f, hist_temp, bn=None, increase=0):
+    def __init__(self, n, f, temp, bn=None, increase=0):
         super(Hourglass_history, self).__init__()
-        self.hist_temp = hist_temp
+        self.temp = temp
         nf = f + increase
         self.up1 = Residual(f, f) # f+8
         # Lower branch
@@ -77,7 +77,7 @@ class Hourglass_history(nn.Module):
         self.f = f
         # Recursive hourglass
         if self.n > 1:
-            self.low2 = Hourglass_history(n-1, nf, hist_temp, bn=bn)
+            self.low2 = Hourglass_history(n-1, nf, temp, bn=bn)
         else:
             self.low2 = Residual(nf, nf)
         self.low3 = Residual(nf*3, f) # prev nf*3
@@ -106,7 +106,7 @@ class Hourglass_history(nn.Module):
             lang_value = Ww_v[self.n-1](lang_feat)
                         
             attn = torch.mm(spa_query, lang_key.permute(1, 0))
-            attn = torch.softmax(attn/(self.hist_temp*math.sqrt(D)), dim=-1)
+            attn = torch.softmax(attn/(self.temp*math.sqrt(D)), dim=-1)
             attn_val = torch.mm(attn, lang_value)
             
             fuse_feat = torch.cat([spa_feat, attn_val], dim=-1).view(H, W, 2*D).permute(2, 0, 1)
@@ -141,7 +141,7 @@ class Hourglass_history(nn.Module):
                 hist_key = Wh_k[self.n-1](histories[i]) # T D
                 hist_value = Wh_v[self.n-1](histories[i])
                 attn = torch.mm(spa_query, hist_key.permute(1, 0))
-                attn = torch.softmax(attn/(self.hist_temp*math.sqrt(D)), dim=-1)
+                attn = torch.softmax(attn/(self.temp*math.sqrt(D)), dim=-1)
                 attn_val = torch.mm(attn, hist_value)
                 
                 fuse_feat = torch.cat([spa_feat, attn_val], dim=-1).view(H, W, 3*((D)//2)).permute(2, 0, 1)
@@ -158,9 +158,9 @@ class Hourglass_history(nn.Module):
     
     
 class Hourglass_nonhistory(nn.Module):
-    def __init__(self, n, f, hist_temp, bn=None, increase=0):
+    def __init__(self, n, f, temp, bn=None, increase=0):
         super(Hourglass_nonhistory, self).__init__()
-        self.hist_temp = hist_temp
+        self.temp = temp
         nf = f + increase
         self.up1 = Residual(f, f) # f+8
         # Lower branch
@@ -171,7 +171,7 @@ class Hourglass_nonhistory(nn.Module):
         self.f = f
         # Recursive hourglass
         if self.n > 1:
-            self.low2 = Hourglass_nonhistory(n-1, nf, hist_temp, bn=bn)
+            self.low2 = Hourglass_nonhistory(n-1, nf, temp, bn=bn)
         else:
             self.low2 = Residual(nf, nf)
         self.low3 = Residual(nf*2, f)
@@ -198,7 +198,7 @@ class Hourglass_nonhistory(nn.Module):
             lang_value = Ww_v[self.n-1](lang_feat)
             
             attn = torch.mm(spa_query, lang_key.permute(1, 0))
-            attn = torch.softmax(attn/(self.hist_temp*math.sqrt(D)), dim=-1)
+            attn = torch.softmax(attn/(self.temp*math.sqrt(D)), dim=-1)
             attn_val = torch.mm(attn, lang_value)
             
             fuse_feat = torch.cat([spa_feat, attn_val], dim=-1).view(H, W, 2*D).permute(2, 0, 1)
