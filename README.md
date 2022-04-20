@@ -51,22 +51,3 @@ blender --background --python render_images_wo_stack.py -- --use_gpu 1 --materia
 7. Image data will be saved to `clevr-dataset-gen/output`.
 8. To find how to annotate bounding box from the generated files, 
    - refer to `{this repository}/find_bbox_info.pynb`
-
-## TO-DOs
-- organize data
-- count the number of data again
-- organize/upgrade code
-- check the reproducibility with the best model and test cases. 
-- check whether the similar result can be reproduced.
-- Organize and Uploade code for image synthesis. 
-
-## Code for model training
-### Environment Preparation
-
-## Data
-### Download
-### Usage and Visualization
-
-## Code for synthetic image generation
-### Environment Preparation
-### How to run this code
