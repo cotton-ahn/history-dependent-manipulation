@@ -10,7 +10,7 @@ img_size = 256
 sc_dim = 2
 
 class IT2P_history(nn.Module):
-    def __init__(self, inp_dim, oup_dim, dictionary, word_embed_dim, time_embed_dim=64, depth=4, t_length=8, bn=False, increase=0):
+    def __init__(self, inp_dim, oup_dim, dictionary, word_embed_dim, hist_temp, time_embed_dim=64, depth=4, t_length=8, bn=False, increase=0):
         super(IT2P_history, self).__init__()
         
         self.time_embedder = nn.Embedding(t_length, time_embed_dim)
@@ -43,7 +43,7 @@ class IT2P_history(nn.Module):
             Residual(inp_dim//2, inp_dim)
         )
         
-        self.hgs = Hourglass_history(depth, inp_dim, bn, increase)
+        self.hgs = Hourglass_history(depth, inp_dim, hist_temp, bn, increase)
         self.features = nn.Sequential(Residual(inp_dim, inp_dim),
                                       Conv(inp_dim, inp_dim, 1, bn=False, relu=True)) 
         self.outs = Conv(inp_dim, oup_dim, 1, relu=False, bn=False)
@@ -88,7 +88,7 @@ class IT2P_history(nn.Module):
     
         
 class IT2P_nonhistory(nn.Module):
-    def __init__(self, inp_dim, oup_dim, dictionary, word_embed_dim, time_embed_dim=64, depth=4, t_length=8, bn=False, increase=0):
+    def __init__(self, inp_dim, oup_dim, dictionary, word_embed_dim, hist_temp, time_embed_dim=64, depth=4, t_length=8, bn=False, increase=0):
         super(IT2P_nonhistory, self).__init__()
         
         self.time_embedder = nn.Embedding(t_length, time_embed_dim)
@@ -111,7 +111,7 @@ class IT2P_nonhistory(nn.Module):
             Residual(inp_dim//2, inp_dim)
         )
         
-        self.hgs = Hourglass_nonhistory(depth, inp_dim, bn, increase)
+        self.hgs = Hourglass_nonhistory(depth, inp_dim, hist_temp, bn, increase)
         self.features = nn.Sequential(Residual(inp_dim, inp_dim),
                                       Conv(inp_dim, inp_dim, 1, bn=False, relu=True)) 
         self.outs = Conv(inp_dim, oup_dim, 1, relu=False, bn=False)
