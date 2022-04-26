@@ -38,11 +38,13 @@ def train_history(model, optimizer, samples, spatial_coords, device='cuda'):
     
     return loss.item()
 
+
 def train_nonhistory(model, optimizer, samples, spatial_coords, device='cuda'):    
     mse = nn.MSELoss(reduction='mean')
 
-    loss = 0.0
+    total_loss = 0.0
     for i, sample in enumerate(samples):
+        loss = 0.0
         sort_idx = torch.argsort(sample['sentence_length'], descending=True)
         sample['sentence'] = sample['sentence'][sort_idx]
         sample['start_img'] = sample['start_img'][sort_idx]
@@ -62,8 +64,9 @@ def train_nonhistory(model, optimizer, samples, spatial_coords, device='cuda'):
         loss += mse(pred[:, 0, :, :], pick_gt)
         loss += mse(pred[:, 1, :, :], place_gt)
         
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item()/len(samples)
     
-    return loss.item()
+    return total_loss

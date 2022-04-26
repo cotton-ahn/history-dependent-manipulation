@@ -118,10 +118,7 @@ class Hourglass_history(nn.Module):
         torch.cuda.empty_cache()
         
         B, D, H, W = low2.shape
-        
-        ### NEW
-        
-        # num_layers = 2
+
         if self.n == 1: 
             self.curr_feat = torch.mean(low2, dim=[2, 3]).view(low2.shape[0], low2.shape[1]) # B X D 
         
@@ -143,7 +140,7 @@ class Hourglass_history(nn.Module):
                 attn = torch.mm(spa_query, hist_key.permute(1, 0))
                 attn = torch.softmax(attn/(self.temp*math.sqrt(D)), dim=-1)
                 attn_val = torch.mm(attn, hist_value)
-                
+            
                 fuse_feat = torch.cat([spa_feat, attn_val], dim=-1).view(H, W, 3*((D)//2)).permute(2, 0, 1)
                 new_low2.append(fuse_feat[None, :, :, :])
                 
