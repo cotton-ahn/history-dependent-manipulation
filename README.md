@@ -25,7 +25,7 @@ An official data + code for "Visually Grounding Language Instruction for History
 ## Network Validation
 - Use `./test_qualitative_saver.ipynb` to select how results (heatmaps) are generated based on the randomly sampled scenario
 - Use `./test_quantitative_saver.ipynb` to save generated results into .json files.
-    - In this notebook, inputs are from `test_tasks` folder, which contains sampled test history-dependent-manipulation scnarios.
+    - In this notebook, inputs are from `./test_tasks` folder, which contains sampled test history-dependent-manipulation scnarios.
     - Save outputs into `./performance` folder. In code, a variable `result_dir` is the one that defines where your test result will be saved
     - Saved outputs can be analyzed by using `./test_quantitative_plotter.ipynb`.
 - More details about validation will be updated based on the [Issues](https://github.com/cotton-ahn/history-dependent-manipulation/issues).
